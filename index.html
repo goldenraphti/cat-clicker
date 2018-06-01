@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    
+    <title>Title</title>
+    <meta name="author" content="Raphael Ferrand">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- links to Google Fonts -->
+     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,600" rel="stylesheet"> 
+    
+
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.min.css">
+    
+    <link rel="stylesheet" href="jasmine/lib/jasmine-2.1.2/jasmine.css">
+
+    <script src="jasmine/lib/jasmine-2.1.2/jasmine.js"></script>
+    <script src="jasmine/lib/jasmine-2.1.2/jasmine-html.js"></script>
+    <script src="jasmine/lib/jasmine-2.1.2/boot.js"></script>
+    
+</head>
+
+<body>
+    <div id="container">
+      
+    <nav>
+        <h2>Cat list</h2>
+        <ul></ul>
+    </nav>
+    <main>
+       <h1>The Official Cat Clicker !!!</h1>
+        
+        <div id="cat-display">
+            <div id="cat-name"></div>
+            <div id="cat-photo-gallery">
+            </div>
+            <div id="cat-clicks">
+                <p>This cat's photo has been clicked <span id="click-display"></span>.</p>
+            </div>
+        </div>
+        
+    </main>
+        
+    </div>
+    
+    <script src="js/app.js"></script>
+    <script src="jasmine/spec/cat-clicker-spec.js"></script>
+</body>
