@@ -22,8 +22,6 @@ class NewCatClass {
     // method adding event listener on its photo
     photoAdding() {
         
-        console.log('starting photoClickingListening method');
-        
         // create an image HTML element
         let newCatImg = document.createElement('img');
         // append this new image at the end of the photo gallery in the DOM
@@ -35,11 +33,71 @@ class NewCatClass {
         // add event listener on its photo
         newCatImg.addEventListener('click', (function(object) {
             return function() {
+                // increase the photoClicksCounter
                 object.photoClickCounter++;
-                console.log(`The photo of ${object.name} has been clicked ${object.photoClickCounter} times`);
+                // add the cat's amount of clicks beneath the displayed photo
+                
+                if(object.photoClickCounter === 0){
+                    catClickPlacer.textContent = `The photo of ${object.name} has never yet been clicked. Let's start !`;
+                } else if(object.photoClickCounter === 1) {
+                    catClickPlacer.textContent = `The photo of ${object.name} has been clicked ${object.photoClickCounter} time.`;
+                } else {
+                    catClickPlacer.textContent = `The photo of ${object.name} has been clicked ${object.photoClickCounter} times.`;
+                }
             };
         })(this));
 
+    }
+    
+    // method adding the cat name in the sidebar list
+    insertNameInSidebarList() {
+        
+        // select sidebar in the DOM
+        let sidebarList = document.getElementById('sidebar-list');
+        // create a <li> HTML element
+        let newCatListEntry = document.createElement('li');
+        // create a <a> HTML element inside the li previously created
+        let newCatListLinkEntry = document.createElement('a');
+        // append the a in the li element
+        newCatListEntry.appendChild(newCatListLinkEntry);
+        // insert cat's name in the a element
+        newCatListLinkEntry.textContent = `${this.name}`;
+        
+        // append this cat's name in the sidebar in the DOM
+        sidebarList.appendChild(newCatListEntry);
+        
+        // add event listener on the link, to display the corresponding photo
+        newCatListLinkEntry.addEventListener('click', (function(object) {
+            return function() {
+                
+                // removes any cat name already displayed 
+                while (photoGallery.hasChildNodes()) {
+                    photoGallery.removeChild(photoGallery.lastChild);
+                }
+                // add the photo of the current name clicked
+                object.photoAdding();
+                
+                // removes any photo already displayed 
+                while (catNamePlacer.hasChildNodes()) {
+                    catNamePlacer.removeChild(catNamePlacer.lastChild);
+                }
+                // add the cat's name clicked above the displayed photo
+                catNamePlacer.textContent = `${object.name}`;
+                
+                // removes any clicks indicator already displayed 
+                while (catClickPlacer.hasChildNodes()) {
+                    catClickPlacer.removeChild(catClickPlacer.lastChild);
+                }
+                // add the cat's name clicked above the displayed photo
+                if(object.photoClickCounter === 0){
+                    catClickPlacer.textContent = `The photo of ${object.name} has never yet been clicked. Let's start !`;
+                } else if(object.photoClickCounter === 1) {
+                    catClickPlacer.textContent = `The photo of ${object.name} has been clicked ${object.photoClickCounter} time.`;
+                } else {
+                    catClickPlacer.textContent = `The photo of ${object.name} has been clicked ${object.photoClickCounter} times.`;
+                }
+            };
+        })(this));
     }
 
     
@@ -62,29 +120,17 @@ cats.set('cat6', cat6);
 
 // select the photo gallery container in the DOM
 const photoGallery = document.getElementById('cat-photo-gallery');
+// select the cat name place holder in the DOM
+const catNamePlacer = document.getElementById('cat-name');
+// select the photo gallery container in the DOM
+const catClickPlacer = document.getElementById('cat-clicks');
 
 // function detecting the amount of pictures to create, and displaying them, it's being invoked immediately, passing cats as argument
 (function createsPhotoGallery() {
     
     // function to loop through each cat in the cats gallery
     for ( const cat of cats) {
-        cat[1].photoAdding();
+        cat[1].insertNameInSidebarList();
     }
-    
-    
-    
-    
+
 })(cats);
-
-// select all photos of cats on the page
-let photoCat = document.getElementsByClassName('cat-photo');
-
-
-
-// function increasing the cat counter, to be used when click the photo
-function increaseCatPhotoCounter() {
-    console.log('clicking photo');
-    this.photoClickCounter++;
-    console.log(this.photoClickCounter);
-    return this.photoClickCounter;
-}
