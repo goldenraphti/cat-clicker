@@ -21,14 +21,35 @@
     <script src="jasmine/lib/jasmine-2.1.2/jasmine-html.js"></script>
     <script src="jasmine/lib/jasmine-2.1.2/boot.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
 </head>
 
 <body>
     <div id="container">
-      
+    
     <nav>
-        <h2>Cat list</h2>
-        <ul id="sidebar-list"></ul>
+        <div id="cat-list-div">
+            <h2>Cat list</h2>
+            <ul id="sidebar-list"></ul>
+        </div>
+        <div id="admin-area">
+            <button id="admin-button">Admin</button>
+            <div id="admin-form-container">
+                <form class="admin-form">
+                    <label for="name">Name of the cat:</label>
+                    <input type="text"  name="cat_name" id="name" placeholder="name of the cat">
+                    <label for="url">Photo URL:</label>
+                    <input type="url" name="photo_URL"  id="url" placeholder="photo URL">
+                    <label for="click">Initial ClickCounter:</label>
+                    <input type="number" name="click_counter" id="click" placeholder="0">
+                    <div id="admin-form-button-div">
+                        <button id="admin-cancel" >Cancel</button>
+                        <button type="submit" id="admin-submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </nav>
     <main>
        <h1>The Official Cat Clicker !!!</h1>
@@ -48,3 +69,4 @@
     <script src="js/app.js"></script>
     <script src="jasmine/spec/cat-clicker-spec.js"></script>
 </body>
+</html>
